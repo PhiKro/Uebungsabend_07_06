@@ -62,7 +62,7 @@ public class ChatClient implements Runnable {
 						} else {
 							newUser(input1);
 						}
-					} else if (input1[0].equalsIgnoreCase("<msg>")) {
+					} else if (input1[0].equalsIgnoreCase("<msg>") && input1.length == 2) {
 						sendToAll(input1);
 					} else if (input1[0].equalsIgnoreCase("<msgto>") && input1.length == 3) {
 						sendToUser(input1);
@@ -123,6 +123,7 @@ public class ChatClient implements Runnable {
 	}
 
 	private void sendToAll(String[] input1) {
+		logMessage(this.getName() + ": " + input1[1]);
 		for (ChatClient client : clients) {
 			if (!(client.getName().equals(this.getName())))
 				client.sendMessage(this.getName() + ": " + input1[1]);
